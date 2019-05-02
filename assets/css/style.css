@@ -19,7 +19,7 @@
   position: relative;
 }
 
-#user {
+#search-input {
   width: 50%;
 }
 
@@ -35,6 +35,8 @@ h1 {
 #submit {
   background-color: #585454;
   color: white;
+  
+  
 }
 
 img {
@@ -58,9 +60,10 @@ img {
   box-shadow: 0 0 0 0.2rem white;
 }
 
-#movie {
+#movie-div {
   padding: 30px;
   min-height: 100%;
+ 
 }
 
 .form-control:focus {
@@ -92,7 +95,7 @@ img {
 
 #recipe {}
 
-#recipetext {
+#drink-div {
   border: 1px solid #585454;
   padding: 10px;
   border-radius: 10px;
@@ -103,4 +106,14 @@ img {
 p {
   clear: both;
   padding-top: 20px;
+}
+
+#movie-div img {
+  width: 500px;
+  margin:0 auto;
+}
+
+#drink-div img {
+  width: 50px;
+  height:50px;
 }
