@@ -19,7 +19,7 @@
   position: relative;
 }
 
-#user {
+#search-div {
   width: 50%;
 }
 
@@ -58,7 +58,7 @@ img {
   box-shadow: 0 0 0 0.2rem white;
 }
 
-#movie {
+#movie-div {
   padding: 30px;
   min-height: 100%;
 }
@@ -96,7 +96,7 @@ img {
   color: grey;
 }
 
-#recipe {}
+/* #drink-div {} */
 
 #drink-thumbnail {
   max-width: 500px;
