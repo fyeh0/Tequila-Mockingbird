@@ -3,6 +3,14 @@ $.ajax({
   method: "GET"
 }).then(function(response) {
   console.log(response);
+  var containerDiv = $(".container");
+
+  var titleDiv = $("<div>").text(response.Title);
+  var yearDiv = $("<div>").text(response.Year);
+  var actorsDiv = $("<div>").text(response.Actors);
+  var genreDiv = $("<div>").text(response.Genre);
+
+  containerDiv.append(titleDiv, yearDiv, actorsDiv, genreDiv);
 });
 
 $.ajax({
