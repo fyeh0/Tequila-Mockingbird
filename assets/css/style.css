@@ -73,13 +73,14 @@ img {
   display: inline;
 }
 
-.img-thumbnail {
+#movie-thumbnail {
   padding: 0.50rem;
   background-color: #fff;
   border: 2px solid #e94a54;
   margin: 0 auto;
   max-width: unset;
   margin-bottom: 10px;
+  max-width: 500px;
 }
 
 #footer {
@@ -90,7 +91,16 @@ img {
   background-color: #585454;
 }
 
+#footer-text {
+  text-align: center;
+  color: grey;
+}
+
 #recipe {}
+
+#drink-thumbnail {
+  max-width: 500px;
+}
 
 #recipetext {
   border: 1px solid #585454;
