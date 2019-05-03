@@ -267,16 +267,21 @@ function updateDrinkDiv(response) {
   // Response from cocktailDB included below so we don't have to keep looking up the JSON object values
 
   const recipeContainer = $("#recipetext");
+  const ingredUl = $("<ul>");
+  var titleDiv = $("<h3>").text(response.strDrink);
+  recipeContainer.attr("class", "clear-fix");
+  recipeContainer.append(titleDiv);
+  recipeContainer.append(ingredUl);
   let ingredientList = getIngredientList(response);
   var imgURL = response.strDrinkThumb;
-  var titleDiv = $("<div>").text(response.strDrink);
   var imageDiv = $("<img>").attr("src", imgURL);
   imageDiv.addClass("img-thumbnail");
   for (let i = 0; i < ingredientList.length; i++) {
-    let recipeDiv = $(`<div>${ingredientList[i]}</div>`);
+    let recipeDiv = $(`<li>${ingredientList[i]}</li>`);
     console.log(ingredientList[i]);
-    recipeContainer.append(titleDiv, recipeDiv, imageDiv);
+    ingredUl.append(recipeDiv);
   }
+  recipeContainer.append(imageDiv);
 
   /*
 dateModified: "2015-08-18 14:42:59"
