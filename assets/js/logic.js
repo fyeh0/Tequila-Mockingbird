@@ -457,3 +457,4 @@ $("#submit-form").on("submit", search);
 // =======================================================================
 // make sure the display is clear when the page loads
 clearDisplay();
+
