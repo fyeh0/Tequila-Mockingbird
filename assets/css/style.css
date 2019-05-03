@@ -30,6 +30,14 @@ h1 {
   bottom: 0px;
   right: 0px;
   border-radius: 10px;
+  text-shadow: 2px 2px 3px #a03038
+}
+
+#modal-button {
+  float: right;
+  background-color: #585454;
+  box-shadow: 0 0 0 0.2rem white;
+
 }
 
 #submit {
