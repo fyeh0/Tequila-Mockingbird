@@ -201,7 +201,7 @@ function clearDisplay() {
 }
 
 function updateMovieDiv(response) {
-
+  console.log("updateMovieDiv");
   // var containerDiv = $(".container");
 
   // var titleDiv = $("<div>").text(response.Title);
@@ -248,8 +248,20 @@ imdbVotes: "507,046"
 }
 
 function updateDrinkDiv(response) {
+  console.log("updateDrinkDiv");
   // TODO implement this function to display the data to the user
   // Response from cocktailDB included below so we don't have to keep looking up the JSON object values
+
+  const recipeContainer = $("#recipetext");
+  let ingredientList = getIngredientList(response);
+  for (let i = 0; i < ingredientList.length; i++) {
+
+    let recipeDiv = $(`<div>${ingredientList[i]}</div>`);
+    console.log(ingredientList[i]);
+    recipeContainer.append(recipeDiv);
+  }
+
+  
 
   /*
 dateModified: "2015-08-18 14:42:59"
@@ -305,6 +317,52 @@ strMeasure15: ""
 strTags: "IBA,ContemporaryClassic"
 strVideo: null
    */
+}
+
+// function getIngredientList(response) {
+//   let ingredientList = [];
+//   for (let i = 1; i <= 15; i++) {
+//     let ingredient = eval(`response.strIngredient${i}`);
+//     let measure = eval(`response.strMeasure${i}`);
+//     if (ingredient && ingredient != "") {
+//       if (!measure.endsWith(" ")) {
+//         measure += " ";
+//       }
+
+//       ingredientList.push(measure + ingredient);
+//     }
+//   }
+//   return ingredientList;
+// }
+
+function getIngredientList(response) {
+  let ingredientList = [];
+  appendIngredient(ingredientList, response.strIngredient1,  response.strMeasure1);
+  appendIngredient(ingredientList, response.strIngredient2,  response.strMeasure2);
+  appendIngredient(ingredientList, response.strIngredient3,  response.strMeasure3);
+  appendIngredient(ingredientList, response.strIngredient4,  response.strMeasure4);
+  appendIngredient(ingredientList, response.strIngredient5,  response.strMeasure5);
+  appendIngredient(ingredientList, response.strIngredient6,  response.strMeasure6);
+  appendIngredient(ingredientList, response.strIngredient7,  response.strMeasure7);
+  appendIngredient(ingredientList, response.strIngredient8,  response.strMeasure8);
+  appendIngredient(ingredientList, response.strIngredient9,  response.strMeasure9);
+  appendIngredient(ingredientList, response.strIngredient10, response.strMeasure10);
+  appendIngredient(ingredientList, response.strIngredient11, response.strMeasure11);
+  appendIngredient(ingredientList, response.strIngredient12, response.strMeasure12);
+  appendIngredient(ingredientList, response.strIngredient13, response.strMeasure13);
+  appendIngredient(ingredientList, response.strIngredient14, response.strMeasure14);
+  appendIngredient(ingredientList, response.strIngredient15, response.strMeasure15);
+  return ingredientList;
+}
+
+function appendIngredient(ingredientList, ingredient, measure) {
+  if (ingredient && ingredient != "") {
+    if (!measure.endsWith(" ")) {
+      measure += " ";
+    }
+
+    ingredientList.push(measure + ingredient);
+  }
 }
 
 function updateErrorDiv(message) {
