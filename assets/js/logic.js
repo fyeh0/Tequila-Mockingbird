@@ -1,5 +1,6 @@
 // mapping of known genres/spirits
-const resultsArr = [{
+const resultsArr = [
+  {
     genre: "thriller",
     spirit: "bourbon"
   },
@@ -72,7 +73,7 @@ function handleMovieResponse(response) {
     // the div gets updated with the movie information
     updateMovieDiv(response);
 
-    //calls getSpiritForGenre with our genreData gathered above 
+    //calls getSpiritForGenre with our genreData gathered above
     let spirit = getSpiritForGenre(genreData);
     if (spirit) {
       // If spirit is found in our array then it is sent to cocktailDBquery to return a drink
@@ -89,7 +90,7 @@ function handleMovieResponse(response) {
   }
 }
 
-// uses the responses from the cocktailBD AJAX call 
+// uses the responses from the cocktailBD AJAX call
 function handleDrinkResponse(cocktailName, response) {
   console.log("found recipe: " + cocktailName);
   console.log(response);
@@ -104,7 +105,7 @@ function handleDrinkResponse(cocktailName, response) {
   }
 }
 
-// Uses genreData called from handleMovieResponse() then compares it to our resultsArr[] by looping through it 
+// Uses genreData called from handleMovieResponse() then compares it to our resultsArr[] by looping through it
 // and returns a matching spirit if found, or undefined if not found
 function getSpiritForGenre(genreData) {
   // remember that each movie can have multiple genres.  it's possible that some of them are not included
@@ -141,47 +142,58 @@ function OMDBquery(movie) {
   $.ajax({
     url: queryURL,
     method: "GET"
-  }).then(function (response) {
-    handleMovieResponse(response)
-  }).catch(function (error) {
-    // error case
-    let message = `${movie} was not found in OMDB`;
-    updateErrorDiv(message);
-  });
+  })
+    .then(function(response) {
+      handleMovieResponse(response);
+    })
+    .catch(function(error) {
+      // error case
+      let message = `${movie} was not found in OMDB`;
+      updateErrorDiv(message);
+    });
 }
 
 function cocktailDBquery(spirit) {
   console.log("searching for spirit: " + spirit);
-  const spiritUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + spirit;
+  const spiritUrl =
+    "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=" + spirit;
 
   $.ajax({
     url: spiritUrl,
     method: "GET"
-  }).then(function (spiritResponse) {
-    const randomIndex = Math.floor(Math.random() * spiritResponse.drinks.length);
-    const cocktailId = spiritResponse.drinks[randomIndex].idDrink;
-    const cocktailName = spiritResponse.drinks[randomIndex].strDrink;
-    console.log("found drink: " + cocktailName);
-    console.log(spiritResponse);
+  })
+    .then(function(spiritResponse) {
+      const randomIndex = Math.floor(
+        Math.random() * spiritResponse.drinks.length
+      );
+      const cocktailId = spiritResponse.drinks[randomIndex].idDrink;
+      const cocktailName = spiritResponse.drinks[randomIndex].strDrink;
+      console.log("found drink: " + cocktailName);
+      console.log(spiritResponse);
 
-    const cocktailUrl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + cocktailId;
-    $.ajax({
-      url: cocktailUrl,
-      method: "GET"
-    }).then(function (cocktailResponse) {
-      handleDrinkResponse(cocktailName, cocktailResponse);
-    }).catch(function (error) {
+      const cocktailUrl =
+        "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" +
+        cocktailId;
+      $.ajax({
+        url: cocktailUrl,
+        method: "GET"
+      })
+        .then(function(cocktailResponse) {
+          handleDrinkResponse(cocktailName, cocktailResponse);
+        })
+        .catch(function(error) {
+          // error case
+          let message = `Recipe not found for ${cocktailName}`;
+          updateErrorDiv(message);
+        });
+      //this is handling if there is no response back from the API
+      let response = undefined;
+    })
+    .catch(function(error) {
       // error case
-      let message = `Recipe not found for ${cocktailName}`;
+      let message = `Drink not found for ${spirit}`;
       updateErrorDiv(message);
     });
-    //this is handling if there is no response back from the API
-    let response = undefined;
-  }).catch(function (error) {
-    // error case
-    let message = `Drink not found for ${spirit}`;
-    updateErrorDiv(message);
-  });
 }
 // =======================================================================
 // END AJAX STUFF
@@ -201,17 +213,18 @@ function clearDisplay() {
 }
 
 function updateMovieDiv(response) {
-  console.log("updateMovieDiv");
-  // var containerDiv = $(".container");
+  $("#movie").empty();
+  var movieDiv = $("#movie");
+  var imgURL = response.Poster;
+  var titleDiv = $("<div>").text(response.Title);
+  var yearDiv = $("<div>").text(response.Year);
+  var actorsDiv = $("<div>").text(response.Actors);
+  var genreDiv = $("<div>").text(response.Genre);
+  var imageDiv = $("<img>").attr("src", imgURL);
+  imageDiv.addClass("img-thumbnail");
+  movieDiv.append(titleDiv, yearDiv, actorsDiv, genreDiv, imageDiv);
 
-  // var titleDiv = $("<div>").text(response.Title);
-  // var yearDiv = $("<div>").text(response.Year);
-  // var actorsDiv = $("<div>").text(response.Actors);
-  // var genreDiv = $("<div>").text(genre);
-
-  // containerDiv.append(titleDiv, yearDiv, actorsDiv, genreDiv);
-
-   // TODO implement this function to display the data to the user
+  // TODO implement this function to display the data to the user
   // Response from cocktailDB included below so we don't have to keep looking up the JSON object values
 
   /*
@@ -248,20 +261,22 @@ imdbVotes: "507,046"
 }
 
 function updateDrinkDiv(response) {
+  $("#recipetext").empty();
   console.log("updateDrinkDiv");
   // TODO implement this function to display the data to the user
   // Response from cocktailDB included below so we don't have to keep looking up the JSON object values
 
   const recipeContainer = $("#recipetext");
   let ingredientList = getIngredientList(response);
+  var imgURL = response.strDrinkThumb;
+  var titleDiv = $("<div>").text(response.strDrink);
+  var imageDiv = $("<img>").attr("src", imgURL);
+  imageDiv.addClass("img-thumbnail");
   for (let i = 0; i < ingredientList.length; i++) {
-
     let recipeDiv = $(`<div>${ingredientList[i]}</div>`);
     console.log(ingredientList[i]);
-    recipeContainer.append(recipeDiv);
+    recipeContainer.append(titleDiv, recipeDiv, imageDiv);
   }
-
-  
 
   /*
 dateModified: "2015-08-18 14:42:59"
@@ -337,21 +352,81 @@ strVideo: null
 
 function getIngredientList(response) {
   let ingredientList = [];
-  appendIngredient(ingredientList, response.strIngredient1,  response.strMeasure1);
-  appendIngredient(ingredientList, response.strIngredient2,  response.strMeasure2);
-  appendIngredient(ingredientList, response.strIngredient3,  response.strMeasure3);
-  appendIngredient(ingredientList, response.strIngredient4,  response.strMeasure4);
-  appendIngredient(ingredientList, response.strIngredient5,  response.strMeasure5);
-  appendIngredient(ingredientList, response.strIngredient6,  response.strMeasure6);
-  appendIngredient(ingredientList, response.strIngredient7,  response.strMeasure7);
-  appendIngredient(ingredientList, response.strIngredient8,  response.strMeasure8);
-  appendIngredient(ingredientList, response.strIngredient9,  response.strMeasure9);
-  appendIngredient(ingredientList, response.strIngredient10, response.strMeasure10);
-  appendIngredient(ingredientList, response.strIngredient11, response.strMeasure11);
-  appendIngredient(ingredientList, response.strIngredient12, response.strMeasure12);
-  appendIngredient(ingredientList, response.strIngredient13, response.strMeasure13);
-  appendIngredient(ingredientList, response.strIngredient14, response.strMeasure14);
-  appendIngredient(ingredientList, response.strIngredient15, response.strMeasure15);
+  appendIngredient(
+    ingredientList,
+    response.strIngredient1,
+    response.strMeasure1
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient2,
+    response.strMeasure2
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient3,
+    response.strMeasure3
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient4,
+    response.strMeasure4
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient5,
+    response.strMeasure5
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient6,
+    response.strMeasure6
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient7,
+    response.strMeasure7
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient8,
+    response.strMeasure8
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient9,
+    response.strMeasure9
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient10,
+    response.strMeasure10
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient11,
+    response.strMeasure11
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient12,
+    response.strMeasure12
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient13,
+    response.strMeasure13
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient14,
+    response.strMeasure14
+  );
+  appendIngredient(
+    ingredientList,
+    response.strIngredient15,
+    response.strMeasure15
+  );
   return ingredientList;
 }
 
