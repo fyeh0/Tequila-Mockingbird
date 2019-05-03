@@ -216,7 +216,7 @@ function updateMovieDiv(response) {
   $("#movie").empty();
   var movieDiv = $("#movie");
   var imgURL = response.Poster;
-  var titleDiv = $("<div>").text(response.Title);
+  var titleDiv = $("<h3>").text(response.Title);
   var yearDiv = $("<div>").text(response.Year);
   var actorsDiv = $("<div>").text(response.Actors);
   var genreDiv = $("<div>").text(response.Genre);

@@ -5,6 +5,7 @@
 
 #search {
   padding: 10px;
+  margin-bottom: 15px;
   text-align: center;
   background-color: #e94a54;
   border-radius: 10px;
@@ -76,10 +77,10 @@ img {
   box-shadow: 0 0 0 0.2rem white;
 }
 
-#movie {
+/* #movie {
   padding: 30px;
   min-height: 100%;
-}
+} */
 
 .form-control:focus {
   border-color: #fff;
@@ -96,9 +97,9 @@ img {
   background-color: #fff;
   border: 2px solid #e94a54;
   margin: 0 auto;
-  max-width: unset;
   margin-bottom: 10px;
-  max-width: 500px;
+  max-width: 458px;
+  max-height: 319px;
 }
 
 #footer {
@@ -114,14 +115,8 @@ img {
   color: grey;
 }
 
-#recipe {
-}
-
-#drink-thumbnail {
-  max-width: 500px;
-}
-
-#recipetext {
+#recipetext,
+#movietext {
   border: 1px solid #585454;
   padding: 10px;
   border-radius: 10px;
