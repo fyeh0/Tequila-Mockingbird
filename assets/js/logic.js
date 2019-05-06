@@ -95,7 +95,6 @@ function handleMovieResponse(response) {
       genreData = response.Genre.split(", ");
     }
   }
-  // let genreData = response.Genre.split(", ");
 
   // checks if there is at least one genre associated with this movie
   if (genreData.length > 0) {
@@ -486,4 +485,3 @@ $("#submit-form").on("submit", search);
 // =======================================================================
 // make sure the display is clear when the page loads
 clearDisplay();
-
