@@ -13,7 +13,7 @@
 
 #header {
   padding: 5px;
-  color: #585454;
+  color: #2b2929;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
@@ -36,12 +36,12 @@ h1 {
 
 #modal-button {
   float: right;
-  background-color: #585454;
+  background-color: #2b2929;
   box-shadow: 0 0 0 0.2rem white;
 }
 
 #submit {
-  background-color: #585454;
+  background-color: #2b2929;
   color: white;
 }
 
