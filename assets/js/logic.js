@@ -1,6 +1,18 @@
 // mapping of known genres/spirits
 const resultsArr = [
   {
+    genre: "sci-fi",
+    spirit: "rum"
+  },
+  {
+    genre: "action",
+    spirit: "vodka"
+  },
+  {
+    genre: "western",
+    spirit: "whiskey"
+  },
+  {
     genre: "thriller",
     spirit: "bourbon"
   },
@@ -10,7 +22,7 @@ const resultsArr = [
   },
   {
     genre: "romance",
-    spirit: "red wine"
+    spirit: "champagne"
   },
   {
     genre: "horror",
@@ -18,7 +30,7 @@ const resultsArr = [
   },
   {
     genre: "drama",
-    spirit: "tequila"
+    spirit: "red wine"
   },
   {
     genre: "crime",
@@ -34,7 +46,7 @@ const resultsArr = [
   },
   {
     genre: "family",
-    spirit: "juice"
+    spirit: "tequila"
   },
   {
     genre: "musical",
@@ -63,10 +75,27 @@ function search(event) {
 function handleMovieResponse(response) {
   console.log("handleMovieResponse");
   console.log(response);
-
+  const genreArr = response.Genre.split(", ");
+  var genreData;
   // spliting the response to return 1 result, each movie can have multiple genres
-  let genreData = response.Genre.split(", ");
-  console.log(genreData);
+  for (let i = 0; i < genreArr.length; i++) {
+    if (genreArr[i] == "Western") {
+      genreData = genreArr[i].split();
+      console.log(genreData);
+    } else if (genreArr[i] == "Romance") {
+      genreData = genreArr[i].split();
+      console.log(genreData);
+    } else if (genreArr[i] == "Horror") {
+      genreData = genreArr[i].split();
+      console.log(genreData);
+    } else if (genreArr[i] == "Sci-Fi") {
+      genreData = genreArr[i].split();
+      console.log(genreData);
+    } else {
+      genreData = response.Genre.split(", ");
+    }
+  }
+  // let genreData = response.Genre.split(", ");
 
   // checks if there is at least one genre associated with this movie
   if (genreData.length > 0) {
