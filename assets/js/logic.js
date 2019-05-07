@@ -57,6 +57,9 @@ const resultsArr = [
 // =======================================================================
 // BEGIN CORE LOGIC
 // =======================================================================
+$('.carousel').carousel({
+  interval: 3000
+})
 
 function search(event) {
   clearDisplay();
@@ -248,8 +251,9 @@ function updateMovieDiv(response) {
   var actorsDiv = $("<div>").text(response.Actors);
   var genreDiv = $("<div>").text(response.Genre);
   var imageDiv = $("<img>").attr("src", imgURL);
+  var plotDiv = $("<div>").text(response.Plot);
   imageDiv.addClass("img-thumbnail");
-  movieDiv.append(titleDiv, yearDiv, actorsDiv, genreDiv, imageDiv);
+  movieDiv.append(titleDiv, yearDiv, actorsDiv, genreDiv, plotDiv, imageDiv);
 }
 
 function updateDrinkDiv(response) {
