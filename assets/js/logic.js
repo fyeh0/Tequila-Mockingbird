@@ -171,10 +171,10 @@ function OMDBquery(movie) {
     url: queryURL,
     method: "GET"
   })
-    .then(function(response) {
+    .then(function (response) {
       handleMovieResponse(response);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // error case
       let message = `${movie} was not found in OMDB`;
       updateErrorDiv(message);
@@ -190,7 +190,7 @@ function cocktailDBquery(spirit) {
     url: spiritUrl,
     method: "GET"
   })
-    .then(function(spiritResponse) {
+    .then(function (spiritResponse) {
       const randomIndex = Math.floor(
         Math.random() * spiritResponse.drinks.length
       );
@@ -206,10 +206,10 @@ function cocktailDBquery(spirit) {
         url: cocktailUrl,
         method: "GET"
       })
-        .then(function(cocktailResponse) {
+        .then(function (cocktailResponse) {
           handleDrinkResponse(cocktailName, cocktailResponse);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // error case
           let message = `Recipe not found for ${cocktailName}`;
           updateErrorDiv(message);
@@ -217,7 +217,7 @@ function cocktailDBquery(spirit) {
       //this is handling if there is no response back from the API
       let response = undefined;
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // error case
       let message = `Drink not found for ${spirit}`;
       updateErrorDiv(message);
@@ -232,7 +232,6 @@ function cocktailDBquery(spirit) {
 // =======================================================================
 
 function clearDisplay() {
-  //TODO Set what is displayed as a default
   //clears inputs from previous searches
   $("#search-input").text("");
   $("#movie-div").text("");
@@ -251,49 +250,11 @@ function updateMovieDiv(response) {
   var imageDiv = $("<img>").attr("src", imgURL);
   imageDiv.addClass("img-thumbnail");
   movieDiv.append(titleDiv, yearDiv, actorsDiv, genreDiv, imageDiv);
-
-  // TODO implement this function to display the data to the user
-  // Response from cocktailDB included below so we don't have to keep looking up the JSON object values
-
-  /*
-Actors: "Roy Scheider, Robert Shaw, Richard Dreyfuss, Lorraine Gary"
-Awards: "Won 3 Oscars. Another 11 wins & 18 nominations."
-BoxOffice: "N/A"
-Country: "USA"
-DVD: "11 Jul 2000"
-Director: "Steven Spielberg"
-Genre: "Adventure, Drama, Thriller"
-Language: "English"
-Metascore: "87"
-Plot: "When a killer shark unleashes chaos on a beach community, it's up to a local sheriff, a marine biologist, and an old seafarer to hunt the beast down."
-Poster: "https://m.media-amazon.com/images/M/MV5BMmVmODY1MzEtYTMwZC00MzNhLWFkNDMtZjAwM2EwODUxZTA5XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg"
-Production: "Universal Pictures"
-Rated: "PG"
-Ratings: Array(3)
-    0: {Source: "Internet Movie Database", Value: "8.0/10"}
-    1: {Source: "Rotten Tomatoes", Value: "97%"}
-    2: {Source: "Metacritic", Value: "87/100"}
-    length: 3
-Released: "20 Jun 1975"
-Response: "True"
-Runtime: "124 min"
-Title: "Jaws"
-Type: "movie"
-Website: "http://www.jaws25.com/"
-Writer: "Peter Benchley (screenplay), Carl Gottlieb (screenplay), Peter Benchley (based on the novel by)"
-Year: "1975"
-imdbID: "tt0073195"
-imdbRating: "8.0"
-imdbVotes: "507,046"  
- */
 }
 
 function updateDrinkDiv(response) {
   $("#recipetext").empty();
   console.log("updateDrinkDiv");
-  // TODO implement this function to display the data to the user
-  // Response from cocktailDB included below so we don't have to keep looking up the JSON object values
-
   const recipeContainer = $("#recipetext");
   const ingredUl = $("<ul>");
   var titleDiv = $("<h3>").text(response.strDrink);
@@ -310,78 +271,7 @@ function updateDrinkDiv(response) {
     ingredUl.append(recipeDiv);
   }
   recipeContainer.append(imageDiv);
-
-  /*
-dateModified: "2015-08-18 14:42:59"
-idDrink: "11007"
-strAlcoholic: "Alcoholic"
-strCategory: "Ordinary Drink"
-strDrink: "Margarita"
-strDrinkAlternate: null
-strDrinkDE: null
-strDrinkES: null
-strDrinkFR: null
-strDrinkThumb: "https://www.thecocktaildb.com/images/media/drink/wpxpvu1439905379.jpg"
-strDrinkZH-HANS: null
-strDrinkZH-HANT: null
-strGlass: "Cocktail glass"
-strIBA: "Contemporary Classics"
-strIngredient1: "Tequila"
-strIngredient2: "Triple sec"
-strIngredient3: "Lime juice"
-strIngredient4: "Salt"
-strIngredient5: ""
-strIngredient6: ""
-strIngredient7: ""
-strIngredient8: ""
-strIngredient9: ""
-strIngredient10: ""
-strIngredient11: ""
-strIngredient12: ""
-strIngredient13: ""
-strIngredient14: ""
-strIngredient15: ""
-strInstructions: "Rub the rim of the glass with the lime slice to make the salt stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt should present to the lips of the imbiber and never mix into the cocktail. Shake the other ingredients with ice, then carefully pour into the glass."
-strInstructionsDE: null
-strInstructionsES: null
-strInstructionsFR: null
-strInstructionsZH-HANS: null
-strInstructionsZH-HANT: null
-strMeasure1: "1 1/2 oz "
-strMeasure2: "1/2 oz "
-strMeasure3: "1 oz "
-strMeasure4: ""
-strMeasure5: ""
-strMeasure6: ""
-strMeasure7: ""
-strMeasure8: ""
-strMeasure9: ""
-strMeasure10: ""
-strMeasure11: ""
-strMeasure12: ""
-strMeasure13: ""
-strMeasure14: ""
-strMeasure15: ""
-strTags: "IBA,ContemporaryClassic"
-strVideo: null
-   */
 }
-
-// function getIngredientList(response) {
-//   let ingredientList = [];
-//   for (let i = 1; i <= 15; i++) {
-//     let ingredient = eval(`response.strIngredient${i}`);
-//     let measure = eval(`response.strMeasure${i}`);
-//     if (ingredient && ingredient != "") {
-//       if (!measure.endsWith(" ")) {
-//         measure += " ";
-//       }
-
-//       ingredientList.push(measure + ingredient);
-//     }
-//   }
-//   return ingredientList;
-// }
 
 function getIngredientList(response) {
   let ingredientList = [];
