@@ -1,6 +1,6 @@
 # Tequila Mockingbird
 
-![Tequila Mockingbird](TequilaMockingbird.png)
+![Tequila Mockingbird](assets/images/TequilaMockingbird.png)
 
 ### Overview
 
@@ -28,3 +28,6 @@ This application solves the important problem of "What should we drink while we 
 - [Natallia Harmon](https://github.com/natalliasdh)
 - [Fang Yeh](https://github.com/fyeh0)
 
+##### Take a look!
+
+[Tequila Mockingbird](https://fyeh0.github.io/Tequila-Mockingbird/)
